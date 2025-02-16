@@ -16,16 +16,17 @@ const formHtml = fs.readFileSync('form.html', 'utf8');
 app.post('/', (req, res) => {
     const post = req.body;
 		let resultHtml = fs.readFileSync('result.html', 'utf8');
-		const types = ["Compact", "Electric", "Cabrio", "Racer"]
+		const carTypes = ["Compact", "Electric", "Cabrio", "Racer"];
 
-		types.forEach((type) => {
+		carTypes.forEach((type) => {
 			let result = rental.price(
+				Date.parse(post.licensestart),
 				Date.parse(post.pickupdate),
 				Date.parse(post.dropoffdate),
 				String(type),
 				Number(post.age)
 			);
-		resultHtml = resultHtml.replace(`${type}$0`, result)
+		resultHtml = resultHtml.replace(`${type}$0`, result);
 		})
     
     res.send(formHtml + resultHtml);
