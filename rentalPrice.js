@@ -24,7 +24,7 @@ function getDays(pickupDate, dropoffDate) {
   const firstDate = new Date(pickupDate);
   const secondDate = new Date(dropoffDate);
 
-	if (firstDate.getTime() > secondDate.getTime() || new Date().setHours(23, 59, 59) > firstDate.getTime()) {
+	if (firstDate.getTime() > secondDate.getTime() || firstDate.getTime() < new Date().setHours(1, 59, 0) ) {
 		return null;
 	}
 
@@ -50,28 +50,18 @@ function price(pickupDate, dropoffDate, type, age) {
   let rentalprice = age;
 
 	if (type === "Racer" && age <= 25 && season === "High") {
-		console.log("Multiplying by 1.5");
 		rentalprice *= 1.5;
 	}
 
   if (season === "High" ) {
-		console.log("Multiplying by 1.15");
     rentalprice *= 1.15;
   }
 
   if (days > 10 && season === "Low" ) {
-			console.log("Multiplying by 0.9")
       rentalprice *= 0.9;
   }
 
-	console.log(rentalprice)
-  return '$' + rentalprice.toFixed(2);
+  return `$${rentalprice.toFixed(2)}`;
 }
-
-
-
-
-
-
 
 exports.price = price;
