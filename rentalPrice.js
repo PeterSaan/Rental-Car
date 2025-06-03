@@ -45,7 +45,7 @@ function getLicenseYears(startDate) {
 	return yearsBetween.toFixed(0);
 }
 
-export function price(licenseStart, pickupDate, dropoffDate, type, age) {
+function price(licenseStart, pickupDate, dropoffDate, type, age) {
 	const days = getDays(pickupDate, dropoffDate);
 	const season = getSeason(pickupDate, dropoffDate);
 	const licenseYears = getLicenseYears(licenseStart)
@@ -90,3 +90,5 @@ export function price(licenseStart, pickupDate, dropoffDate, type, age) {
 
 	return `$${rentalprice.toFixed(2)}`;
 }
+
+module.exports = price;

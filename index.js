@@ -1,7 +1,7 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import { price } from './rentalPrice.js';
-import fs from 'fs';
+const express = require('express');
+const bodyParser = require('body-parser');
+const rental = require('./rentalPrice');
+const fs = require('fs');
 
 const app = express();
 const port = 3000;
@@ -19,7 +19,7 @@ app.post('/', (req, res) => {
 	const carTypes = ["Compact", "Electric", "Cabrio", "Racer"];
 
 	carTypes.forEach((type) => {
-		let result = price(
+		let result = rental.price(
 			Date.parse(post.licensestart),
 			Date.parse(post.pickupdate),
 			Date.parse(post.dropoffdate),
